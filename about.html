@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Our Creche | Mother's Pride</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-yellow: #FFD166;
+            --secondary-orange: #FF9F1C;
+            --accent-blue: #4EA8DE;
+            --accent-pink: #FF99C8;
+            --accent-red: #FF4B4B;
+            --dark-navy: #111827;
+            --light-bg: #FAFAFA;
+            --white: #FFFFFF;
+            --text-muted: #6B7280;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--light-bg); color: var(--dark-navy); overflow-x: hidden; line-height: 1.4; font-size: 0.9rem; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; }
+
+        /* --- Header --- */
+        header.glass-header { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; z-index: 1010; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 8px 25px; border-radius: 50px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); }
+        .logo-img { height: 30px; cursor: pointer; }
+        .hamburger { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+        .hamburger .bar { width: 25px; height: 3px; background: var(--dark-navy); border-radius: 3px; transition: var(--transition); }
+
+        /* --- Menu Overlay --- */
+        .menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-yellow); z-index: 1009; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; clip-path: circle(0% at 100% 0%); transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
+        .menu-overlay.active { clip-path: circle(150% at 100% 0%); }
+        .menu-item { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; text-decoration: none; color: var(--dark-navy); display: block; margin-bottom: 15px; transform: translateY(25px); opacity: 0; transition: var(--transition); }
+        .menu-overlay.active .menu-item { transform: translateY(0); opacity: 1; }
+        .menu-item:hover { color: var(--white); padding-left: 20px; }
+        .menu-num { font-size: 0.9rem; font-weight: 500; vertical-align: middle; margin-right: 12px; }
+
+        /* --- Doodle Art Background --- */
+        .bg-doodles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.5; }
+
+        /* --- Principal's Message (Passport Style) --- */
+        .principal-section { padding: 140px 0 60px; }
+        .principal-flex { display: flex; gap: 50px; align-items: flex-start; }
+        
+        .image-frame { flex-shrink: 0; width: 240px; background: white; padding: 12px 12px 40px 12px; border: 2px solid #E5E7EB; transform: rotate(-3deg); box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; }
+        .image-frame::before { content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 25px; background: rgba(255, 209, 102, 0.4); z-index: 3; } /* Tape Doodle */
+        .principal-photo { width: 100%; height: 220px; object-fit: cover; border-radius: 4px; }
+        
+        .principal-text { flex: 1; }
+        .principal-text h4 { color: var(--accent-red); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-weight: 800; }
+        .principal-text h1 { font-size: 2.8rem; line-height: 1; margin-bottom: 20px; position: relative; }
+        .principal-text p { font-size: 1rem; color: var(--text-muted); font-style: italic; margin-bottom: 15px; position: relative; }
+        .principal-text p::before { content: '"'; position: absolute; left: -25px; top: 0; font-size: 3rem; color: var(--primary-yellow); opacity: 0.4; font-family: serif; }
+
+        /* --- Story Timeline Section --- */
+        .story-section { padding: 60px 0; position: relative; }
+        .story-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; }
+        .story-title span.yellow { color: var(--primary-yellow); }
+        .story-title span.red { color: var(--accent-red); }
+
+        .story-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .story-card { background: var(--white); padding: 25px; border-radius: 20px; border: 2px dashed var(--border-color); transition: 0.3s; position: relative; }
+        .story-card:hover { border-color: var(--primary-yellow); transform: translateY(-5px); border-style: solid; }
+        .story-card i { font-size: 1.8rem; color: var(--primary-yellow); margin-bottom: 15px; display: block; }
+        .story-card h3 { font-size: 1.1rem; margin-bottom: 10px; font-weight: 800; }
+        .story-card p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* --- Contact & Location --- */
+        .contact-section { padding: 80px 0; background: var(--dark-navy); color: white; border-radius: 40px 40px 0 0; margin-top: 40px; }
+        .contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
+        
+        .map-box { border-radius: 25px; overflow: hidden; height: 350px; border: 4px solid rgba(255,255,255,0.05); transform: rotate(1deg); }
+        .map-box iframe { width: 100%; height: 100%; border: none; }
+
+        .contact-info h2 { font-size: 2rem; color: var(--primary-yellow); margin-bottom: 25px; font-weight: 900; }
+        .contact-row { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .icon-circle { width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary-yellow); font-size: 1rem; }
+        .text-group h5 { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px; }
+        .text-group p { font-size: 0.9rem; font-weight: 500; }
+
+        /* Floating Doodle Elements */
+        .zig-zag { position: absolute; width: 80px; opacity: 0.3; }
+
+        @media (max-width: 850px) {
+            .principal-flex { flex-direction: column; align-items: center; text-align: center; }
+            .principal-text p::before { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .image-frame { width: 200px; margin-bottom: 20px; }
+            .principal-text h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="glass-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo"><img src="logo1.png" alt="MP Logo" class="logo-img"></a>
+            <button class="hamburger" id="menu-toggle"><div class="bar"></div><div class="bar"></div></button>
+        </div>
+    </header>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay">
+        <div class="menu-content">
+            <a href="index.html" class="menu-item"><span class="menu-num">00</span> Home</a>
+            <a href="index.html#notice" class="menu-item"><span class="menu-num">01</span> Notice</a>
+            <a href="info.html#admission" class="menu-item"><span class="menu-num">02</span> Admission</a>
+            <a href="#" class="menu-item close-overlay"><span class="menu-num">03</span> About Us</a>
+            <a href="index.html#activities" class="menu-item"><span class="menu-num">04</span> Activities</a>
+            <a href="success.html" class="menu-item"><span class="menu-num">05</span> Student Success</a>
+        </div>
+    </div>
+
+    <!-- Artistic Background Doodles -->
+    <svg class="bg-doodles" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 200 Q 100 150 150 200 T 250 200" fill="none" stroke="#FFD166" stroke-width="3" stroke-dasharray="8 8"/>
+        <circle cx="850" cy="400" r="30" fill="none" stroke="#4EA8DE" stroke-width="2"/>
+        <path d="M800 800 L 850 750 L 900 800" fill="none" stroke="#FF99C8" stroke-width="4"/>
+    </svg>
+
+    <!-- Principal Section -->
+    <section class="principal-section">
+        <div class="container">
+            <div class="principal-flex">
+                <div class="image-frame">
+                    <!-- Placeholder for principal.png - update with your real image path -->
+                    <img src="principal.png" alt="Principal" class="principal-photo">
+                </div>
+                <div class="principal-text">
+                    <h4>Message from the Principal</h4>
+                    <h1>Nurturing <span class="highlight">Geniuses.</span></h1>
+                    <p>At Mother's Pride, we believe every child is a unique star waiting to shine. Our journey since 2010 has been about more than just education—it's been about building a foundation of love, curiosity, and confidence.</p>
+                    <p>In our creche, learning is a playful adventure, and safety is our promise to every parent in the valley.</p>
+                    <div style="margin-top: 20px;">
+                        <span style="font-weight: 900; font-size: 1.1rem;">Ms. Jahan Ara</span><br>
+                        <span style="color: var(--text-muted); font-weight: 600; font-size: 0.8rem;">Founder & Principal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <h2 class="story-title">
+                <span class="yellow">Our</span> <span class="red">Creche Story.</span>
+            </h2>
+            
+            <div class="story-grid">
+                <div class="story-card">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <h3>Est. 2010</h3>
+                    <p>Started with a vision to redefine early childhood care in Srinagar, focusing on holistic child development.</p>
+                </div>
+                <div class="story-card">
+                    <i class="fa-solid fa-heart-circle-check"></i>
+                    <h3>15+ Years</h3>
+                    <p>A decade and a half of trust from parents, making us one of the most reliable creches in the region.</p>
+                </div>
+                <div class="story-card">
+                    <i class="fa-solid fa-masks-theater"></i>
+                    <h3>Play-Way Method</h3>
+                    <p>We use modern, interactive teaching styles that make children fall in love with the process of learning.</p>
+                </div>
+                <div class="story-card">
+                    <i class="fa-solid fa-shield-cat"></i>
+                    <h3>Safe Haven</h3>
+                    <p>Every corner of our facility is designed for maximum safety, giving parents complete peace of mind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="map-area">
+                    <div class="map-box">
+                        <!-- Embedded Google Map -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.626!2d74.821!3d34.104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e18599424c5385%3A0xe5a14d59a8c1737!2sMother&#39;s%20Pride!5e0!3m2!1sen!2sin!4v1715545000000" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <h2>Reach <span style="color: white;">Out.</span></h2>
+                    
+                    <div class="contact-row">
+                        <div class="icon-circle"><i class="fa-solid fa-location-arrow"></i></div>
+                        <div class="text-group">
+                            <h5>Our Home</h5>
+                            <p>Khatidarwazah, Makdoom Sahab Road, Srinagar</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-row">
+                        <div class="icon-circle"><i class="fa-solid fa-phone-volume"></i></div>
+                        <div class="text-group">
+                            <h5>Call Us</h5>
+                            <p>+91 9906600369</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-row">
+                        <div class="icon-circle"><i class="fa-solid fa-paper-plane"></i></div>
+                        <div class="text-group">
+                            <h5>Email Us</h5>
+                            <p>motherspride@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px;">
+                        <a href="https://maps.app.goo.gl/FvddAiVvUE5b6aaj7" target="_blank" style="color: var(--primary-yellow); font-weight: 700; text-decoration: none; font-size: 0.8rem; border-bottom: 2px solid;">Open in Google Maps <i class="fa-solid fa-external-link" style="font-size: 0.6rem; margin-left: 5px;"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 30px 0; background: var(--dark-navy); color: rgba(255,255,255,0.3); font-size: 0.75rem;">
+        &copy; 2026 Mother's Pride Srinagar.
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        function toggleMenu() {
+            menuOverlay.classList.toggle('active');
+            const bars = menuToggle.querySelectorAll('.bar');
+            if (menuOverlay.classList.contains('active')) {
+                bars[0].style.transform = 'translateY(4px) rotate(45deg)';
+                bars[1].style.transform = 'translateY(-4px) rotate(-45deg)';
+            } else {
+                bars[0].style.transform = 'none';
+                bars[1].style.transform = 'none';
+            }
+        }
+        menuToggle.addEventListener('click', toggleMenu);
+        document.querySelector('.close-overlay').addEventListener('click', toggleMenu);
+    </script>
+</body>
+</html>
