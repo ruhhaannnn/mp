@@ -29,14 +29,12 @@
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
 
-        /* --- Header --- */
         header.glass-header { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; z-index: 1010; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 8px 25px; border-radius: 50px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); }
         .logo-img { height: 35px; cursor: pointer; }
         .hamburger { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
         .hamburger .bar { width: 30px; height: 3px; background: var(--dark-navy); border-radius: 3px; transition: var(--transition); }
 
-        /* --- Menu Overlay --- */
         .menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-yellow); z-index: 1009; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; clip-path: circle(0% at 100% 0%); transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
         .menu-overlay.active { clip-path: circle(150% at 100% 0%); }
         .menu-item { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; text-decoration: none; color: var(--dark-navy); display: block; margin-bottom: 20px; transform: translateY(30px); opacity: 0; transition: var(--transition); }
@@ -44,21 +42,17 @@
         .menu-item:hover { color: var(--white); padding-left: 20px; }
         .menu-num { font-size: 1rem; font-weight: 500; vertical-align: middle; margin-right: 15px; }
 
-        /* --- Hero & Stats Counter --- */
         .hero { padding: 160px 0 60px; text-align: center; }
         .hero h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 900; margin-bottom: 40px; position: relative; display: inline-block; }
         
-        /* Underline Doodle for Heading */
         .hero h1::after { content: ''; position: absolute; bottom: -12px; left: 0; width: 100%; height: 10px; background: url("data:image/svg+xml,%3Csvg width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q 50 0 100 10 T 200 10' fill='none' stroke='%23FFD166' stroke-width='4'/%3E%3C/svg%3E"); background-size: contain; opacity: 0.8; }
 
         .stats-banner { display: flex; justify-content: center; gap: 50px; margin-bottom: 40px; flex-wrap: wrap; }
         .stat-item { text-align: center; }
         
-        /* Numbers set to Primary Yellow */
         .stat-number { font-size: 4rem; font-weight: 900; color: var(--primary-yellow); line-height: 1; display: block; text-shadow: 0 5px 15px rgba(255, 209, 102, 0.2); }
         .stat-label { font-size: 1rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- Timeline Canvas --- */
         .timeline { padding: 40px 0 100px; position: relative; }
         .year-section { margin-bottom: 80px; position: relative; }
         
@@ -69,7 +63,6 @@
 
         .connector-line { position: absolute; top: 100px; left: 50%; width: 4px; height: 40px; background: repeating-linear-gradient(to bottom, var(--border-color) 0, var(--border-color) 10px, transparent 10px, transparent 20px); transform: translateX(-50%); z-index: 1; }
 
-        /* --- Student Sticker Cards --- */
         .names-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
         .student-sticker { background: var(--white); padding: 18px 12px; border-radius: 18px; text-align: center; transition: var(--transition); border: 2px solid transparent; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; }
         .student-sticker:hover { transform: scale(1.1) rotate(2deg); z-index: 5; box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--primary-yellow); }
@@ -77,14 +70,11 @@
         .student-sticker h4 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; color: var(--dark-navy); }
         .student-sticker p { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); line-height: 1.2; }
 
-        /* Doodle Elements */
         .doodle { position: absolute; pointer-events: none; opacity: 0.6; z-index: 1; }
         .star-doodle { width: 30px; height: 30px; top: -10px; right: -10px; fill: var(--primary-yellow); }
 
-        /* --- Floating BG Scribbles --- */
         .bg-scribbles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-        /* --- Color Themes per Year --- */
         .color-1 .year-blob { background: var(--accent-blue); color: white; }
         .color-2 .year-blob { background: var(--secondary-orange); color: white; }
         .color-3 .year-blob { background: var(--accent-pink); color: white; }
@@ -102,7 +92,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header class="glass-header">
         <div class="header-inner">
             <a href="index.html" class="logo"><img src="logo1.png" alt="Logo" class="logo-img"></a>
@@ -110,19 +99,17 @@
         </div>
     </header>
 
-    <!-- Menu Overlay -->
     <div class="menu-overlay">
         <div class="menu-content">
             <a href="index.html" class="menu-item"><span class="menu-num">00</span> Home</a>
             <a href="index.html#notice" class="menu-item"><span class="menu-num">01</span> Notice</a>
-            <a href="info.html#admission" class="menu-item"><span class="menu-num">02</span> Admission</a>
-            <a href="info.html#about" class="menu-item"><span class="menu-num">03</span> About Us</a>
+            <a href="form.html" class="menu-item"><span class="menu-num">02</span> Admission Form</a>
+            <a href="about.html" class="menu-item"><span class="menu-num">03</span> About Us</a>
             <a href="index.html#activities" class="menu-item"><span class="menu-num">04</span> Activities</a>
             <a href="#" class="menu-item close-overlay"><span class="menu-num">05</span> Student Success</a>
         </div>
     </div>
 
-    <!-- Background Art -->
     <svg class="bg-scribbles" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
         <path d="M50 50 Q 150 0 250 100 T 450 50" fill="none" stroke="#FFD166" stroke-width="2" stroke-dasharray="5 5" />
         <circle cx="900" cy="150" r="40" fill="none" stroke="#4EA8DE" stroke-width="2" />
@@ -131,13 +118,11 @@
 
     <section class="hero">
         <div class="container">
-            <!-- Colored Heading -->
             <h1>
                 <span style="color: var(--primary-yellow);">Our</span> 
                 <span style="color: var(--accent-red);">Success Names.</span>
             </h1>
             
-            <!-- Animated Stats with Yellow Numbers -->
             <div class="stats-banner">
                 <div class="stat-item">
                     <span class="stat-number" data-target="459">0</span>
@@ -157,12 +142,10 @@
 
     <div class="container">
         <div class="timeline" id="timeline-container">
-            <!-- Timeline years injected by JS -->
         </div>
     </div>
 
     <script>
-        // Menu Toggle
         const menuToggle = document.getElementById('menu-toggle');
         const menuOverlay = document.querySelector('.menu-overlay');
         function toggleMenu() {
@@ -178,7 +161,6 @@
         menuToggle.addEventListener('click', toggleMenu);
         document.querySelector('.close-overlay').addEventListener('click', toggleMenu);
 
-        // --- Animated Counter Logic ---
         function animateCounters() {
             const stats = document.querySelectorAll('.stat-number');
             stats.forEach(stat => {
@@ -200,7 +182,6 @@
         }
         window.addEventListener('load', animateCounters);
 
-        // --- Timeline Data Generator ---
         const schools = ["Burn Hall School", "Presentation Convent", "Delhi Public School", "Tyndale Biscoe", "Mallinson Girls School", "Green Valley"];
         const students = ["Ayaan", "Zoya", "Musaib", "Inaya", "Hamza", "Sehar", "Faizan", "Ayat", "Kamran", "Dua", "Basit", "Zunaira"];
         
