@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother's Pride | Early Learning</title>
+    
+    <!-- Modern typography and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+    <!-- Launch Page / Preloader -->
+    <div class="launch-screen">
+        <h1 class="reveal-text">Mother's <span>Pride</span></h1>
+        <div class="loader-bar"></div>
+    </div>
+
+    <!-- Header (Stays permanently on top of everything) -->
+    <header class="glass-header">
+        <div class="header-inner">
+            <a href="#" class="logo close-overlay-global">
+                <img src="logo1.png" alt="MP Logo" id="logo1" class="logo-img">
+            </a>
+            <button class="hamburger" id="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </button>
+        </div>
+    </header>
+
+    <!-- Full Screen Menu Overlay -->
+    <div class="menu-overlay">
+        <div class="menu-content">
+            <a href="#" class="menu-item close-overlay-global"><span class="menu-num">00</span> Home</a>
+            <a href="#notice" class="menu-item trigger-overlay"><span class="menu-num">01</span> Notice</a>
+            <a href="info.html#admission" class="menu-item"><span class="menu-num">02</span> Admission</a>
+            <a href="info.html#about" class="menu-item"><span class="menu-num">03</span> About</a>
+            <a href="#activities" class="menu-item trigger-overlay"><span class="menu-num">04</span> Activities</a>
+            <a href="info.html#success" class="menu-item"><span class="menu-num">05</span> Student Success</a>
+        </div>
+        <div class="menu-footer">
+            <p>Srinagar, Jammu & Kashmir</p>
+            <p>hello@motherspride.com</p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text scroll-reveal">
+                <h1>Where little<br>minds take<br><span class="highlight">big leaps.</span></h1>
+                <p>A premium early learning experience in the heart of Srinagar. We nurture curiosity, creativity, and confidence.</p>
+                <div class="hero-actions">
+                    <a href="#admission" class="btn-red trigger-overlay">Begin the Journey</a>
+                </div>
+            </div>
+            
+            <div class="hero-visual scroll-reveal">
+                <div class="deco-element circle-1"></div>
+                <div class="deco-element circle-2"></div>
+                <div class="deco-dots"></div>
+                
+                <div class="image-morph-wrapper">
+                    <div class="image-morph-container">
+                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80" alt="Happy child learning">
+                    </div>
+                </div>
+                
+                <!-- Floating Badges / Pills -->
+                <div class="floating-badge badge-1 parallax-item float-anim" data-speed="-0.1">
+                    <div class="badge-icon"><i class="fa-solid fa-star"></i></div>
+                    <div class="badge-text">Top Rated</div>
+                </div>
+                <div class="floating-badge badge-2 parallax-item float-anim-delay" data-speed="0.15">
+                    <div class="badge-icon"><i class="fa-solid fa-shapes"></i></div>
+                    <div class="badge-text">Playful Learning</div>
+                </div>
+                <div class="floating-badge badge-3 parallax-item float-anim" data-speed="0.08">
+                    <div class="badge-icon"><i class="fa-solid fa-heart"></i></div>
+                    <div class="badge-text">Safe Space</div>
+                </div>
+                <div class="floating-badge badge-4 parallax-item float-anim-delay" data-speed="-0.12">
+                    <div class="badge-icon"><i class="fa-solid fa-palette"></i></div>
+                    <div class="badge-text">Creative Arts</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container scroll-reveal">
+            <h2 class="section-title">Rooted in <span style="color: #FF4B4B;">love</span>, <br>growing with <span class="highlight">purpose</span>.</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
+                    <h3>Our Vision</h3>
+                    <p>To create a safe, vibrant, and loving environment where children from Kashmir can discover their unique potential through modern, holistic education.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
+                    <h3>Our Approach</h3>
+                    <p>We blend traditional values with contemporary play-way methods, ensuring your child develops cognitive, emotional, and social skills naturally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose scroll-reveal">
+        <div class="container text-center">
+            <h2 class="why-choose-title">Why Choose <span class="highlight">Mother's Pride?</span></h2>
+            <p class="section-subtitle">Your experienced trusted partner in providing exceptional early education for your child.</p>
+            
+            <div class="feature-boxes">
+                <svg class="dashed-line" viewBox="0 0 1000 200" preserveAspectRatio="none">
+                    <path d="M0,100 Q250,200 500,100 T1000,100" fill="none" stroke="#111827" stroke-width="2" stroke-dasharray="10,10"/>
+                </svg>
+                
+                <div class="box-grid">
+                    <div class="feature-box glow-card" style="transform: rotate(-3deg);">
+                        <div class="box-icon"><i class="fa-solid fa-seedling"></i></div>
+                        <h5>Holistic Learning</h5>
+                        <p>Fostering all-round development through a balanced blend of academics, play, and life skills.</p>
+                    </div>
+                    <div class="feature-box glow-card" style="transform: rotate(2deg); margin-top: 30px;">
+                        <div class="box-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <h5>Expert Educators</h5>
+                        <p>Skilled teachers dedicated to nurturing every child's unique potential.</p>
+                    </div>
+                    <div class="feature-box glow-card" style="transform: rotate(-2deg); margin-top: 10px;">
+                        <div class="box-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h5>Safe and Secure</h5>
+                        <p>A protected, child-friendly environment ensuring safety and peace of mind.</p>
+                    </div>
+                    <div class="feature-box glow-card" style="transform: rotate(3deg); margin-top: 40px;">
+                        <div class="box-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                        <h5>Innovative Learning</h5>
+                        <p>Engaging, modern teaching methods that make learning fun and impactful.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Reviews Section -->
+    <section class="testimonials scroll-reveal">
+        <div class="container text-center">
+            <div class="testimonial-box">
+                <h2 class="section-title">Our happy parents</h2>
+                <div class="slider-row">
+                    <button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left-long"></i></button>
+                    <div class="slider-content">
+                        <div class="testimonial-content active">
+                            <p class="parent-name">Parents of Dharshavardini (Sr.K.G)</p>
+                            <p class="parent-quote">"Thanks to all of you for the support and love for Dharsha. She has been directly admitted to Sr. K.G. In a short period of time, her reserved nature changed a lot she started to mingle with others easily. You are the best among prior schooling kids we have ever known!"</p>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="parent-name">Parents of Ayan (Nursery)</p>
+                            <p class="parent-quote">"The teachers at Mother's Pride are incredibly patient and kind. My son looks forward to going to school every single day!"</p>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="parent-name">Parents of Zara (PlayGroup)</p>
+                            <p class="parent-quote">"We've seen a remarkable improvement in Zara's communication skills. The play-way method truly works wonders here."</p>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="parent-name">Parents of Meher (PlayGroup)</p>
+                            <p class="parent-quote">"Our daughter has become so independent and confident. Thank you for laying such a strong foundation for her."</p>
+                        </div>
+                    </div>
+                    <button class="nav-btn next-btn"><i class="fa-solid fa-arrow-right-long"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>Mother's Pride</h2>
+                    <p>Khatidarwazah, Makdoom Sahab Road,<br>Srinagar, J&K</p>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fa-solid fa-phone"></i> +91 9906600369</p>
+                    <p><i class="fa-solid fa-envelope"></i> motherspride@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mother's Pride Srinagar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Notice Board Overlay -->
+    <div id="notice" class="content-overlay">
+        <div class="overlay-body">
+            <div class="overlay-title-area text-center">
+                <h2>Notice <span class="highlight">Board.</span></h2>
+                <p class="page-subtitle">Latest <span style="color: #FF4B4B; font-weight: 700;">updates</span> and <span style="color: #FF4B4B; font-weight: 700;">announcements</span>.</p>
+            </div>
+            <!-- Notices Injected Here -->
+            <div id="notices-container" class="content-stack">
+                <div class="loading-state"><i class="fa-solid fa-spinner fa-spin"></i> Fetching...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activities Overlay -->
+    <div id="activities" class="content-overlay">
+        <div class="overlay-body">
+            <div class="overlay-title-area text-center">
+                <h2>Recent <span class="highlight">Activities.</span></h2>
+                <p class="page-subtitle">See what <span style="color: #FF4B4B; font-weight: 700;">our little ones</span> have been up to.</p>
+            </div>
+            <!-- Activities Injected Here -->
+            <div id="activities-container" class="content-stack">
+                <div class="loading-state"><i class="fa-solid fa-spinner fa-spin"></i> Fetching...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admission Overlay -->
+    <div id="admission" class="content-overlay" style="background: var(--dark-navy); color: white;">
+        <div class="overlay-body text-center" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+            <i class="fa-solid fa-graduation-cap" style="font-size: 4rem; color: var(--primary-yellow); margin-bottom: 20px;"></i>
+            <h2 style="font-size: 3rem; color: white;">Admissions <span class="highlight">2026.</span></h2>
+            <p style="color: rgba(255,255,255,0.7); max-width: 500px; margin: 20px auto; font-size: 1.2rem;">Admissions for the upcoming academic year are now open. Secure your child's spot at Mother's Pride today.</p>
+            <a href="form.html" class="btn-primary" style="margin-top: 20px; background: var(--primary-yellow); color: var(--dark-navy);">Fill Admission Form</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
