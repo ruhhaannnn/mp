@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Gallery | Mother's Pride</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-yellow: #FFD166;
+            --secondary-orange: #FF9F1C;
+            --accent-blue: #4EA8DE;
+            --accent-pink: #FF99C8;
+            --accent-green: #06D6A0;
+            --accent-purple: #B185DB;
+            --accent-red: #FF4B4B;
+            --dark-navy: #111827;
+            --light-bg: #FAFAFA;
+            --white: #FFFFFF;
+            --text-muted: #6B7280;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--light-bg); color: var(--dark-navy); overflow-x: hidden; line-height: 1.4; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+
+        /* --- Header --- */
+        header.glass-header { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; z-index: 1010; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 8px 25px; border-radius: 50px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); }
+        .logo-img { height: 35px; cursor: pointer; }
+        .hamburger { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
+        .hamburger .bar { width: 30px; height: 3px; background: var(--dark-navy); border-radius: 3px; transition: var(--transition); }
+
+        /* --- Menu Overlay --- */
+        .menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-yellow); z-index: 1009; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; clip-path: circle(0% at 100% 0%); transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
+        .menu-overlay.active { clip-path: circle(150% at 100% 0%); }
+        .menu-item { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; text-decoration: none; color: var(--dark-navy); display: block; margin-bottom: 20px; transform: translateY(30px); opacity: 0; transition: var(--transition); }
+        .menu-overlay.active .menu-item { transform: translateY(0); opacity: 1; }
+        .menu-item:hover { color: var(--white); padding-left: 20px; }
+        .menu-num { font-size: 1rem; font-weight: 500; vertical-align: middle; margin-right: 15px; }
+
+        /* --- Hero & Stats Counter --- */
+        .hero { padding: 160px 0 60px; text-align: center; }
+        .hero h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 900; margin-bottom: 40px; position: relative; display: inline-block; }
+        
+        /* Underline Doodle for Heading */
+        .hero h1::after { content: ''; position: absolute; bottom: -12px; left: 0; width: 100%; height: 10px; background: url("data:image/svg+xml,%3Csvg width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q 50 0 100 10 T 200 10' fill='none' stroke='%23FFD166' stroke-width='4'/%3E%3C/svg%3E"); background-size: contain; opacity: 0.8; }
+
+        .stats-banner { display: flex; justify-content: center; gap: 50px; margin-bottom: 40px; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+        
+        /* Numbers set to Primary Yellow */
+        .stat-number { font-size: 4rem; font-weight: 900; color: var(--primary-yellow); line-height: 1; display: block; text-shadow: 0 5px 15px rgba(255, 209, 102, 0.2); }
+        .stat-label { font-size: 1rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- Timeline Canvas --- */
+        .timeline { padding: 40px 0 100px; position: relative; }
+        .year-section { margin-bottom: 80px; position: relative; }
+        
+        .year-header { display: flex; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; }
+        .year-blob { width: 100px; height: 100px; border-radius: 40% 60% 70% 30% / 40% 50% 60% 40%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 900; box-shadow: 0 10px 25px rgba(0,0,0,0.05); animation: morph 8s ease-in-out infinite alternate; position: relative; z-index: 2; }
+        
+        @keyframes morph { 0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 40%; } 100% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; } }
+
+        .connector-line { position: absolute; top: 100px; left: 50%; width: 4px; height: 40px; background: repeating-linear-gradient(to bottom, var(--border-color) 0, var(--border-color) 10px, transparent 10px, transparent 20px); transform: translateX(-50%); z-index: 1; }
+
+        /* --- Student Sticker Cards --- */
+        .names-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .student-sticker { background: var(--white); padding: 18px 12px; border-radius: 18px; text-align: center; transition: var(--transition); border: 2px solid transparent; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; }
+        .student-sticker:hover { transform: scale(1.1) rotate(2deg); z-index: 5; box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--primary-yellow); }
+        
+        .student-sticker h4 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; color: var(--dark-navy); }
+        .student-sticker p { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); line-height: 1.2; }
+
+        /* Doodle Elements */
+        .doodle { position: absolute; pointer-events: none; opacity: 0.6; z-index: 1; }
+        .star-doodle { width: 30px; height: 30px; top: -10px; right: -10px; fill: var(--primary-yellow); }
+
+        /* --- Floating BG Scribbles --- */
+        .bg-scribbles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+        /* --- Color Themes per Year --- */
+        .color-1 .year-blob { background: var(--accent-blue); color: white; }
+        .color-2 .year-blob { background: var(--secondary-orange); color: white; }
+        .color-3 .year-blob { background: var(--accent-pink); color: white; }
+        .color-4 .year-blob { background: var(--accent-green); color: white; }
+        .color-5 .year-blob { background: var(--accent-purple); color: white; }
+        .color-0 .year-blob { background: var(--primary-yellow); color: var(--dark-navy); }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .stat-number { font-size: 3rem; }
+            .stats-banner { gap: 20px; }
+            .names-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="glass-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo"><img src="logo1.png" alt="Logo" class="logo-img"></a>
+            <button class="hamburger" id="menu-toggle"><div class="bar"></div><div class="bar"></div></button>
+        </div>
+    </header>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay">
+        <div class="menu-content">
+            <a href="index.html" class="menu-item"><span class="menu-num">00</span> Home</a>
+            <a href="index.html#notice" class="menu-item"><span class="menu-num">01</span> Notice</a>
+            <a href="info.html#admission" class="menu-item"><span class="menu-num">02</span> Admission</a>
+            <a href="info.html#about" class="menu-item"><span class="menu-num">03</span> About Us</a>
+            <a href="index.html#activities" class="menu-item"><span class="menu-num">04</span> Activities</a>
+            <a href="#" class="menu-item close-overlay"><span class="menu-num">05</span> Student Success</a>
+        </div>
+    </div>
+
+    <!-- Background Art -->
+    <svg class="bg-scribbles" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 50 Q 150 0 250 100 T 450 50" fill="none" stroke="#FFD166" stroke-width="2" stroke-dasharray="5 5" />
+        <circle cx="900" cy="150" r="40" fill="none" stroke="#4EA8DE" stroke-width="2" />
+        <path d="M100 900 L 200 850 L 150 950 Z" fill="none" stroke="#FF99C8" stroke-width="2" />
+    </svg>
+
+    <section class="hero">
+        <div class="container">
+            <!-- Colored Heading -->
+            <h1>
+                <span style="color: var(--primary-yellow);">Our</span> 
+                <span style="color: var(--accent-red);">Success Names.</span>
+            </h1>
+            
+            <!-- Animated Stats with Yellow Numbers -->
+            <div class="stats-banner">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="459">0</span>
+                    <span class="stat-label">Students Placed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="32">0</span>
+                    <span class="stat-label">Different Schools</span>
+                </div>
+            </div>
+            
+            <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted); font-weight: 500;">
+                Tracing our legacy of excellence from our humble beginnings to the bright stars of today. Every name here represents a journey that started with a single step at Mother's Pride.
+            </p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="timeline" id="timeline-container">
+            <!-- Timeline years injected by JS -->
+        </div>
+    </div>
+
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        function toggleMenu() {
+            menuOverlay.classList.toggle('active');
+            const bars = menuToggle.querySelectorAll('.bar');
+            if (menuOverlay.classList.contains('active')) {
+                bars[0].style.transform = 'translateY(4.5px) rotate(45deg)';
+                bars[1].style.transform = 'translateY(-4.5px) rotate(-45deg)';
+            } else {
+                bars[0].style.transform = 'none'; bars[1].style.transform = 'none';
+            }
+        }
+        menuToggle.addEventListener('click', toggleMenu);
+        document.querySelector('.close-overlay').addEventListener('click', toggleMenu);
+
+        // --- Animated Counter Logic ---
+        function animateCounters() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                const increment = target / 50; 
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        stat.innerText = Math.ceil(current) + "+";
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        stat.innerText = target + "+";
+                    }
+                };
+                updateCounter();
+            });
+        }
+        window.addEventListener('load', animateCounters);
+
+        // --- Timeline Data Generator ---
+        const schools = ["Burn Hall School", "Presentation Convent", "Delhi Public School", "Tyndale Biscoe", "Mallinson Girls School", "Green Valley"];
+        const students = ["Ayaan", "Zoya", "Musaib", "Inaya", "Hamza", "Sehar", "Faizan", "Ayat", "Kamran", "Dua", "Basit", "Zunaira"];
+        
+        const timelineContainer = document.getElementById('timeline-container');
+        
+        for (let year = 2010; year <= 2026; year++) {
+            const section = document.createElement('div');
+            section.className = `year-section color-${year % 6}`;
+            
+            let stickersHTML = '';
+            for (let i = 0; i < 6; i++) {
+                const randomName = students[Math.floor(Math.random() * students.length)] + " " + String.fromCharCode(65 + Math.floor(Math.random() * 26)) + ".";
+                const school = schools[i % schools.length];
+                
+                stickersHTML += `
+                    <div class="student-sticker">
+                        <svg class="doodle star-doodle" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                        <h4>${randomName}</h4>
+                        <p>${school}</p>
+                    </div>
+                `;
+            }
+
+            section.innerHTML = `
+                <div class="year-header">
+                    <div class="year-blob">${year}</div>
+                    ${year < 2026 ? '<div class="connector-line"></div>' : ''}
+                </div>
+                <div class="names-grid">
+                    ${stickersHTML}
+                </div>
+            `;
+            timelineContainer.appendChild(section);
+        }
+    </script>
+</body>
+</html>
